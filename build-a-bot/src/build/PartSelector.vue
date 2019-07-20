@@ -1,6 +1,6 @@
 <template>
   <div class="part" :class="position">
-    <img :src="selectedPart.src" title="arm"/>
+    <img @click="showPartInfo()" :src="selectedPart.src" title="arm"/>
     <button @click="selectPreviousPart()" class="prev-selector"></button>
     <button @click="selectNextPart()" class="next-selector"></button>
     <span class="sale" v-show="selectedPart.onSale">Sale!</span>
@@ -45,6 +45,9 @@ export default {
     this.emitSelectedPart();
   },
   methods: {
+    showPartInfo() {
+      this.$router.push('/parts');
+    },
     emitSelectedPart() {
       this.$emit('partSelected', this.selectedPart);
     },
@@ -68,8 +71,8 @@ export default {
 <style scoped>
 .part {
   position: relative;
-  width:165px;
-  height:165px;
+  width: 165px;
+  height: 165px;
   border: 3px solid #aaa;
 }
 .sale {
@@ -90,7 +93,8 @@ export default {
   top: -25px;
 }
 .part img {
-  width:165px;
+  width: 165px;
+  cursor: pointer;
 }
 .top {
   border-bottom: none;
@@ -112,7 +116,7 @@ export default {
 }
 .prev-selector {
   position: absolute;
-  z-index:1;
+  z-index: 1;
   top: -3px;
   left: -28px;
   width: 25px;
@@ -120,13 +124,13 @@ export default {
 }
 .next-selector {
   position: absolute;
-  z-index:1;
+  z-index: 1;
   top: -3px;
   right: -28px;
   width: 25px;
   height: 171px;
 }
-.left .prev-selector:after,  .right .prev-selector:after{
+.left .prev-selector:after,  .right .prev-selector:after {
   content: '\25B2'
 }
 .left .next-selector:after, .right .next-selector:after {
@@ -139,7 +143,7 @@ export default {
   content: '\25BA'
 }
 .center .prev-selector, .center .next-selector {
-  opacity:0.8;
+  opacity: 0.8;
 }
 .left .prev-selector {
   top: -28px;
